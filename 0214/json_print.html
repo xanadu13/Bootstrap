@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자바스크립트 json 데이터 출력하기</title>
+  <style>
+  caption{
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--bg-color02);
+  }
+  table {
+  border: 1px #333 solid;
+  font-size: 14px;
+  width: 1200px;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.25);
+  margin: 0px auto;
+  }
+  th {
+  padding: 0px 10px;
+  text-align: left;
+  background: #212772;
+  color: #fff;
+  text-transform: uppercase;
+  overflow: hidden;
+  }
+  td, th {
+  padding: 16px 10px;
+  vertical-align: middle;
+  }
+  td {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  background: #fff;
+  }
+  </style>
+
+    <!-- 제이쿼리 라이브러리 -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+
+  <script>
+
+    $(function(){
+      
+      $.getJSON('./data/test_drive.json', function(data){
+
+      let html = '<table><caption>시승신청 조회 결과</caption><tr><th>번호</th><th>이름</th><th>전화번호</th><th>이메일</th><th>문자수신여부</th><th>시승장소</th><th>시승차량</th><th>보유차종</th><th>시승신청일</th></tr>'
+      // document.write('<table>');
+      // document.write('<caption>시승신청 예약현황</caption>');
+      // document.write('<tr><th>번호</th><th>이름</th><th>전화번호</th><th>SNS</th><th>이메일</th><th>시승차량</th><th>보유차량</th><th>시승날짜</th></tr>');
+
+      for(key in data){
+        // document.write('<tr>');
+          html+=`<tr>`;
+          for(let i in data[key]){
+          // document.write(`<td>${data[key][i]}</td>`);
+            html+=`<td>${data[key][i]}</td>`;
+          }
+          // document.write('</tr>');
+          html+=`</tr>`
+        }
+      // document.write('</table>');
+      html+=`</table>`;
+
+
+      $('.list').html(html)
+
+      });
+
+
+    });
+
+
+  </script>
+  
+</head>
+<body>
+  <h2>자바스크립트 json 데이터 출력하기</h2>
+  <p>닷홈 SQL 데이터 베이스에 저장된 'test_drive' 테이블의 자료를 'json' 파일로 저장하여 자바스크립트로 출력해보기</p>
+
+  <div class="list"></div>
+
+</body>
+</html>
